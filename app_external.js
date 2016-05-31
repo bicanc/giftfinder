@@ -59,6 +59,7 @@ giftFinderApp.controller('mainController', function($scope, $http) {
 	$scope.filters = giftConfig.filters;
 	$http.get(giftConfig.fileLocation).success( function(response) {
 		var products =  JSON.parse(csvJSON(response));
+		console.log(products);
 		for(var i = 0; i < products.length; i++) { 
 			//fiyatlardaki , ler . oluyor.
 			products[i].ratingScore = parseFloat(products[i].ratingScore.replace(/,/, '.')); 
