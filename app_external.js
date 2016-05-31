@@ -143,7 +143,7 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 		$scope.filters[2].fields.sort();
 		$scope.products = products; 
 
-	}
+	 });
 
 
 
