@@ -86,12 +86,16 @@ var giftConfig = {
 var giftFinderApp = angular.module('giftFinderApp', []);
 
 // create the controller and inject Angular's $scope
-giftFinderApp.controller('mainController', function($scope, $http) {
+giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	$scope.products = []; //empty at the first place
 	//var url = 'anneler.csv';
 	$scope.filters = giftConfig.filters;
+	
+
 	$http.get(giftConfig.fileLocation).success(function(response){
-		var products =  JSON.parse(csvJSON(response.toString()));
+		var deferred = $q.defer();
+		
+		var products =  JSON.parse(csvJSON(deferred.response.toString()));
 
 		console.log('products');
 		console.log(products);
@@ -129,7 +133,9 @@ giftFinderApp.controller('mainController', function($scope, $http) {
 		$scope.filters[2].fields.sort();
 		$scope.products = products; 
 
+		return deferred.promise;
    	});
+	
 
 	$scope.predicate = 'price'; 
 	$scope.reverse = true;
