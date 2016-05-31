@@ -90,12 +90,22 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	$scope.products = []; //empty at the first place
 	//var url = 'anneler.csv';
 	$scope.filters = giftConfig.filters;
-	
 
-	$http.get(giftConfig.fileLocation).success(function(response){
-		var deferred = $q.defer();
-		
-		var products =  JSON.parse(csvJSON(deferred.response.toString()));
+
+	var getProducts = function() {
+		var products = null;
+	    var deferred = $q.defer();
+	    if (products !== null) deferred.resolve(products);
+	    $http.get(giftConfig.fileLocation)
+	    	.success(function(response) {
+	      		deferred.resolve(response);
+	    	})
+	    	.error(deferred.reject);
+	    return deferred.promise;
+	}
+
+	getProducts().then(function(response) {
+		var products =  JSON.parse(csvJSON(response.toString()));
 
 		console.log('products');
 		console.log(products);
@@ -133,9 +143,10 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 		$scope.filters[2].fields.sort();
 		$scope.products = products; 
 
-		return deferred.promise;
-   	});
-	
+	}
+
+
+
 
 	$scope.predicate = 'price'; 
 	$scope.reverse = true;
