@@ -90,7 +90,7 @@ giftFinderApp.controller('mainController', function($scope, $http) {
 	$scope.products = []; //empty at the first place
 	//var url = 'anneler.csv';
 	$scope.filters = giftConfig.filters;
-	$http.get(giftConfig.fileLocation).then(function(response){
+	$http.get(giftConfig.fileLocation).success(function(response){
 		var products =  JSON.parse(csvJSON(response.toString()));
 
 		console.log('products');
