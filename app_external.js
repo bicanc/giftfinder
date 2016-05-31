@@ -108,7 +108,7 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 		var products =  JSON.parse(csvJSON(response.toString()));
 
 		console.log('products');
-		console.log(products);
+		console.log(response);
 		for(var i = 0; i < products.length; i++) { 
 			//fiyatlardaki , ler . oluyor.
 			products[i].ratingScore = parseFloat(products[i].ratingScore.replace(/,/, '.')); 
