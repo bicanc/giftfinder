@@ -58,7 +58,7 @@ giftFinderApp.controller('mainController', function($scope, $http) {
 	//var url = 'anneler.csv';
 	$scope.filters = giftConfig.filters;
 	$http.get(giftConfig.fileLocation).then(function(response){
-		var products =  JSON.parse(csvJSON(response));
+		var products =  JSON.parse(csvJSON(response.toString()));
 
 		console.log('products');
 		console.log(products);
@@ -337,7 +337,7 @@ giftFinderApp.config(function($sceProvider) {
 
 //common things
 var csvJSON = function(csv) {
-  var lines=csv.split("\r\n");
+  var lines = csv.split("\r\n");
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
   for(var i=1;i<lines.length;i++){
