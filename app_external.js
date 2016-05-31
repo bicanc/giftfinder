@@ -105,15 +105,20 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	}
 
 	getProducts().then(function(response) {
-		if (!response) console.log('sdaf');
 
 		var products =  JSON.parse(csvJSON(response.toString()));
 
-		Promise.resolve( response ).then(function(datta) {
-			console.log( JSON.parse(csvJSON(datta.toString())) );
+		
+
+		//console.log(products);
+
+
+		Promise.resolve( products ).then(function(datta) {
+			console.log('products');
 		});
 
-		console.log('products');
+		
+
 		
 		for(var i = 0; i < products.length; i++) { 
 			//fiyatlardaki , ler . oluyor.
