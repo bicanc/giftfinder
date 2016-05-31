@@ -1,5 +1,5 @@
 ﻿//common things
-var csvJSON = function(csv) {
+var csvJSON = function(csv, callback) {
   var lines = csv.split("\r\n");
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
@@ -11,7 +11,9 @@ var csvJSON = function(csv) {
       }
       result.push(obj);
   }
-  return JSON.stringify(result); //JSON
+
+  if(callback) callback(JSON.stringify(result));
+  //return JSON.stringify(result); //JSON
 }
 
 Array.prototype.contains = function(obj) {
@@ -116,10 +118,20 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 		Promise.resolve( response ).then(function(datta) {
 
-			var products1 =  JSON.parse(csvJSON(datta.toString()));
+			var aa = datta;
+			aaa = csvJSON(aa, function(data) {
 
-			console.log(datta);
-			console.log('data');
+				var products1 =  JSON.parse(data);
+
+				console.log(products1);
+
+			});
+
+
+			//var products1 =  JSON.parse(aaa);
+
+			//console.log(products1);
+			//console.log('data');
 		});
 
 		
