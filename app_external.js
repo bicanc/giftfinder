@@ -110,7 +110,7 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 		
 
-		console.log(products);
+		console.log(response);
 
 
 		Promise.resolve( products ).then(function(datta) {
