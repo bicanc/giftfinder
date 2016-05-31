@@ -1,0 +1,122 @@
+﻿	<div class="giftFinderContainer row" ng-controller="mainController">
+		<!--<div class="pattern"></div>-->
+		<div class="container">
+
+			<div class="well well-lg giftFilters text-center col-xs-12">
+
+				<form role="form">
+					<div class="row-fluid">
+						<div ng-repeat="filter in filters" class="col-xs-12" ng-class="filter.name == 'Kategori' ? 'col-md-12' : 'col-md-6'">
+							<fieldset>
+								<legend>{{filter.baslik}}</legend>
+								<div ng-repeat="field in filter.fields" class="checkbox checkbox-success checkbox-inline checkbox-circle" ng-class="filter.name == 'Kategori' ? 'checkbox-inline' : ''">
+									<input id="{{field}}" name="{{field}}" class="styled" ng-checked="filter.fieldsChecked[field]" ng-model="filter.fieldsChecked[field]" type="checkbox" ng-click="filterClick()">
+									<label for="{{field}}"> {{field}} </label>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div ng-if="(products | ageFilter: filters[0] | priceFilter: filters[1] | categoryFilter: filters[2] | itemsPerPage:this).length > 0" class="giftResults col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">İşte karşınızda anneniz için en iyi önerilerimiz!</h3>
+					</div>
+
+					<div class="row">
+						<div class="topCont col-xs-12">
+							<div class="paginationContainer col-xs-12  col-sm-9 paginationContainertop " on-page-change="pageChangeHandler(newPageNumber)">
+								<ul class="pagination" ng-if="1 < pages.length">
+								    <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
+								        <a href="" ng-click="setCurrent(1)">&laquo;</a>
+								    </li>
+								    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }" class="ng-scope">
+								        <a href="" ng-click="setCurrent(pagination.current - 1)" class="ng-binding">‹</a>
+								    </li>
+								    <li ng-repeat="pageNumber in pages track by $index" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }">
+								        <a href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a>
+								    </li>
+
+								    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }" class="ng-scope">
+								        <a href="" ng-click="setCurrent(pagination.current + 1)" class="ng-binding">›</a>
+								    </li>
+								    <li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }">
+								        <a href="" ng-click="setCurrent(pagination.last)">&raquo;</a>
+								    </li>
+								</ul>
+							</div>
+
+							<div class="sortGifts col-xs-12 col-sm-3 pull-right">
+							    <div class="form-group">
+							      <div class="col-xs-12">
+							        <select class="form-control" ng-options="sort as sort.text for sort in customSorting" ng-change="sorting(sort)" ng-model="sort">
+							        	<option value=''>- Sıralama -</option>
+							        </select>
+							      </div>
+							    </div>
+							</div>
+						</div>
+
+					</div>
+
+					
+
+					<div class="panel-body productsZone  col-xs-12">
+						<ul>
+							<li ng-repeat="product in products | ageFilter: filters[0] | priceFilter: filters[1] | categoryFilter: filters[2] | itemsPerPage:this" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+								<a href="{{product.productUrl}}">
+									<div class="productImg"><img ng-src="{{product.picture}}"></div>
+									<div class="ratingWrapper">
+										<div class="ratingContainer"><div class="ratingzone" style="width: {{ product.ratingScore * 100 / 5}}%;"></div></div>
+										<div ng-if="product.ratingCount && product.ratingCount != 0" class="rated">({{product.ratingCount}})</div>
+									</div>
+									<div class="productName">{{product.productName}}</div>
+									<div class="filtersContainer">
+										<div ng-repeat="filter in filters">
+											<label>{{filter.name}} : {{product[filter.name]}}</label>
+										</div>
+									</div>
+									<div class="priceContainer">
+										<div ng-if="product.discountRate && product.discountRate != 0" class="discountRate"><span class="perc">%</span>{{product.discountRate}}<br><span>indirim</span></div>
+										<div class="fleft_">
+											<div ng-if="product.crossedOverPrice && product.crossedOverPrice != product.price" class="crossedOverPrice">{{product.crossedOverPrice}} TL</div>
+											<div class="price">{{product.price}} TL</div>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="bottombutton">
+										<span class="btn btn-warning">Ürüne Git</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="paginationContainer col-xs-12" on-page-change="pageChangeHandler(newPageNumber)">
+						<ul class="pagination" ng-if="1 < pages.length">
+						    <li ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }">
+						        <a href="" ng-click="setCurrent(1)">&laquo;</a>
+						    </li>
+						    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }" class="ng-scope">
+						        <a href="" ng-click="setCurrent(pagination.current - 1)" class="ng-binding">‹</a>
+						    </li>
+						    <li ng-repeat="pageNumber in pages track by $index" ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }">
+						        <a href="" ng-click="setCurrent(pageNumber)">{{ pageNumber }}</a>
+						    </li>
+
+						    <li ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }" class="ng-scope">
+						        <a href="" ng-click="setCurrent(pagination.current + 1)" class="ng-binding">›</a>
+						    </li>
+						    <li ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }">
+						        <a href="" ng-click="setCurrent(pagination.last)">&raquo;</a>
+						    </li>
+						</ul>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
