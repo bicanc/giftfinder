@@ -1,5 +1,4 @@
-﻿
-//common things
+﻿//common things
 var csvJSON = function(csv) {
   var lines = csv.split("\r\n");
   var result = [];
@@ -364,8 +363,8 @@ giftFinderApp.config(function($sceProvider) {
 });
 
 
-//angular.element(document).ready(function() {
+angular.element(document).ready(function() {
 	angular.bootstrap(document, ['giftFinderApp']);
-//});
+});
 
 
