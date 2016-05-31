@@ -108,7 +108,11 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 		var products =  JSON.parse(csvJSON(response));
 
-		if (response) console.log(products);
+		//if (response) console.log(products);
+
+		Promise.resolve( response ).then(function(datta) {
+			console.log( JSON.parse(csvJSON(datta)) );
+		});
 
 		console.log('products');
 		
