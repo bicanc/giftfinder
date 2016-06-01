@@ -51,12 +51,13 @@ var giftConfig = {
 
 //common things
 var csvJSON = function(csv) {
-  var lines = csv.split("\r\n");
+  //var lines = csv.split("\r\n");
+  var lines = csv.split("\r");
 
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
 
-  console.log(lines.length);
+  console.log(lines.length)
 
   for(var i=1;i<lines.length;i++){
       var obj = {};
