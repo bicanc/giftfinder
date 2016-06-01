@@ -106,28 +106,19 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	getProducts().then(function(response) {
 
 
-		var products =  JSON.parse(csvJSON(response.toString()));
+		var products =  JSON.parse(csvJSON(response));
 
 		
 
-		
+		var products1 =  JSON.parse(csvJSON(response)); //burada CALLBACK LAZIM SANKİ
 
+		console.log(response);
 
-		Promise.resolve( response ).then(function(datta) {
+		var jsoned = csvJSON(response);
 
-			
+		console.log(jsoned);
 
-
-			var products1 =  JSON.parse(csvJSON(datta)); //burada CALLBACK LAZIM SANKİ
-
-			console.log(datta);
-
-			var jsoned = csvJSON(datta);
-
-			console.log(jsoned);
-
-			console.log('data');
-		});
+		console.log('data');
 
 		
 
