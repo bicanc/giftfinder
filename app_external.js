@@ -51,6 +51,9 @@ var giftConfig = {
 
 //common things
 var csvJSON = function(csv) {
+	console.log('csv');
+	console.log(csv);
+
   var lines = csv.split("\r\n");
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
@@ -108,13 +111,12 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 		var products =  JSON.parse(csvJSON(response));
 		
-		console.log(response);
-		
-		var jsoned = csvJSON(response);
 
-		console.log(jsoned);
+		//var jsoned = csvJSON(response);
 
-		console.log('data');
+		//console.log(jsoned);
+
+		//console.log('data');
 
 		
 
