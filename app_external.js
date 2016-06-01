@@ -63,6 +63,7 @@ var csvJSON = function(csv) {
       result.push(obj);
   }
   console.log(result);
+  
   return JSON.stringify(result); //JSON
 }
 
