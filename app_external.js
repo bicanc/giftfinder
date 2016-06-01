@@ -53,24 +53,16 @@ var giftConfig = {
 var csvJSON = function(csv) {
   //var lines = csv.split("\r\n");
   var lines = csv.split("\n");
-
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
-
-  console.log(lines.length)
-
   for(var i=1;i<lines.length;i++){
       var obj = {};
       var currentline=lines[i].split(giftConfig.fileSlice);
       for(var j=0;j<headers.length;j++){
           obj[headers[j]] = currentline[j];
       }
-
       result.push(obj);
   }
-
-  console.log(result);
-
   return JSON.stringify(result); //JSON
 }
 
@@ -92,14 +84,10 @@ function parse(str) {
 
 
 var giftFinderApp = angular.module('giftFinderApp', []);
-
-// create the controller and inject Angular's $scope
 giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	$scope.products = []; //empty at the first place
 	//var url = 'anneler.csv';
 	$scope.filters = giftConfig.filters;
-
-
 	var getProducts = function() {
 		var products = null;
 	    var deferred = $q.defer();
@@ -111,22 +99,8 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 	    	.error(deferred.reject);
 	    return deferred.promise;
 	}
-
 	getProducts().then(function(response) {
-
-
 		var products =  JSON.parse(csvJSON(response));
-		
-
-		//var jsoned = csvJSON(response);
-
-		//console.log(jsoned);
-
-		//console.log('data');
-
-		
-
-		
 		for(var i = 0; i < products.length; i++) { 
 			//fiyatlardaki , ler . oluyor.
 			products[i].ratingScore = parseFloat(products[i].ratingScore.replace(/,/, '.')); 
@@ -163,9 +137,6 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 	 });
 
-
-
-
 	$scope.predicate = 'price'; 
 	$scope.reverse = true;
 	$scope.sorting = function(sort) {
@@ -183,7 +154,6 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 	};
 	$scope.sort = { };
-
 	//$scope.customSorting = [{text:'Seçin',ascdesc:undefined, value:undefined}]; //sorting generator
 	$scope.sortingFnc = function() {
 		var sorting = giftConfig.sorting;
@@ -266,7 +236,6 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
             }
             i ++;
         }
-
         return $scope.pages;
     }
 	var calculatePageNumber = function(i, currentPage, paginationRange, totalPages) {
@@ -300,8 +269,6 @@ giftFinderApp.filter('itemsPerPage', function () {
 		var newItems = [];
 		var tmpItems = []; //de
 		var productsLength = products.length;
-
-		
 		scope.pagination.last = Math.ceil(productsLength / scope.pageSize);
 	    var begin = ((scope.pagination.current - 1) * scope.pageSize);
 	    var end = begin + scope.pageSize;
@@ -401,5 +368,3 @@ giftFinderApp.config(function($sceProvider) {
 angular.element(document).ready(function() {
 	angular.bootstrap(document, ['giftFinderApp']);
 });
-
-
