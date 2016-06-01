@@ -52,7 +52,7 @@ var giftConfig = {
 //common things
 var csvJSON = function(csv) {
   //var lines = csv.split("\r\n");
-  var lines = csv.split("\r");
+  var lines = csv.split("\n");
 
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
