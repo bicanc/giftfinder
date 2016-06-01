@@ -62,9 +62,10 @@ var csvJSON = function(csv) {
       for(var j=0;j<headers.length;j++){
           obj[headers[j]] = currentline[j];
       }
+      console.log(obj);
       result.push(obj);
   }
-  
+
   console.log(result);
 
   return JSON.stringify(result); //JSON
