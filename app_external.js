@@ -52,6 +52,9 @@ var giftConfig = {
 //common things
 var csvJSON = function(csv) {
   var lines = csv.split("\r\n");
+
+  console.log( lines );
+  
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
   for(var i=1;i<lines.length;i++){
@@ -63,7 +66,7 @@ var csvJSON = function(csv) {
       result.push(obj);
   }
   console.log(result);
-  
+
   return JSON.stringify(result); //JSON
 }
 
