@@ -56,9 +56,6 @@ var csvJSON = function(csv) {
   var result = [];
   var headers=lines[0].split(giftConfig.fileSlice);
 
-  console.log( headers );
-
-  
   for(var i=1;i<lines.length;i++){
       var obj = {};
       var currentline=lines[i].split(giftConfig.fileSlice);
@@ -67,6 +64,7 @@ var csvJSON = function(csv) {
       }
       result.push(obj);
   }
+  
   console.log(result);
 
   return JSON.stringify(result); //JSON
