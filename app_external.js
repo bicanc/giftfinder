@@ -1,37 +1,4 @@
-﻿//common things
-var csvJSON = function(csv) {
-  var lines = csv.split("\r\n");
-  var result = [];
-  var headers=lines[0].split(giftConfig.fileSlice);
-  for(var i=1;i<lines.length;i++){
-      var obj = {};
-      var currentline=lines[i].split(giftConfig.fileSlice);
-      for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-      }
-      result.push(obj);
-  }
-  return JSON.stringify(result); //JSON
-}
-
-Array.prototype.contains = function(obj) {
-    var i = this.length;
-    while (i--) {
-        if (this[i] === obj) { return true; }
-    }
-    return false;
-}
-
-function parse(str) {
-    var args = [].slice.call(arguments, 1),
-    i = 0;
-    return str.replace(/%s/g, function() {
-        return args[i++];
-    });
-}
-
-
-
+﻿
 var giftConfig = {
 	fileLocation: 'http://bicanc.github.io/giftfinder/anneler.csv',
 	fileSlice: ';',
@@ -82,6 +49,38 @@ var giftConfig = {
 	}
 };
 
+//common things
+var csvJSON = function(csv) {
+  var lines = csv.split("\r\n");
+  var result = [];
+  var headers=lines[0].split(giftConfig.fileSlice);
+  for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(giftConfig.fileSlice);
+      for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+  }
+  return JSON.stringify(result); //JSON
+}
+
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] === obj) { return true; }
+    }
+    return false;
+}
+
+function parse(str) {
+    var args = [].slice.call(arguments, 1),
+    i = 0;
+    return str.replace(/%s/g, function() {
+        return args[i++];
+    });
+}
+
 
 var giftFinderApp = angular.module('giftFinderApp', []);
 
@@ -126,7 +125,7 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 			var jsoned = csvJSON(datta);
 
 			console.log(jsoned);
-			
+
 			console.log('data');
 		});
 
