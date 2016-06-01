@@ -116,9 +116,12 @@ giftFinderApp.controller('mainController', function($scope, $http, $q) {
 
 		Promise.resolve( response ).then(function(datta) {
 
+			var jsoned = csvJSON(datta);
 
+			console.log(jsoned);
 
-			var products1 =  JSON.parse(csvJSON(datta.toString())); //burada CALLBACK LAZIM SANKİ
+			
+			var products1 =  JSON.parse(csvJSON(datta)); //burada CALLBACK LAZIM SANKİ
 
 			console.log(datta);
 			console.log('data');
